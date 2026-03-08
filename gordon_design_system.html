@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gordon College — Faculty Portal Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gc-green:       #1a6b3c;
+    --gc-green-dark:  #134f2c;
+    --gc-green-light: #228b4e;
+    --gc-green-pale:  #eef7f2;
+    --gc-gold:        #c9a84c;
+    --gc-gold-light:  #e8c96b;
+    --gc-gold-pale:   #fdf8ec;
+    --white:          #ffffff;
+    --off-white:      #f8f7f4;
+    --surface:        #f1f3f1;
+    --text-dark:      #1a1a1a;
+    --text-mid:       #3a4a3e;
+    --text-muted:     #6b7c70;
+    --border:         #dde5df;
+    --danger:         #c0392b;
+    --danger-pale:    #fdf0ee;
+    --blue:           #2471a3;
+    --blue-pale:      #eaf3fb;
+    --orange:         #d35400;
+    --orange-pale:    #fef0e6;
+  }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: #f0f2f0;
+    color: var(--text-dark);
+    min-height: 100vh;
+  }
+
+  /* ── TOP HEADER ── */
+  .ds-header {
+    background: linear-gradient(135deg, var(--gc-green-dark) 0%, var(--gc-green) 55%, #22704a 100%);
+    padding: 48px 60px 40px;
+    position: relative; overflow: hidden;
+  }
+  .ds-header::before {
+    content:''; position:absolute; top:-80px; right:-80px;
+    width:320px; height:320px; border-radius:50%;
+    background: rgba(201,168,76,0.1); pointer-events:none;
+  }
+  .ds-header::after {
+    content:''; position:absolute; bottom:-60px; left: 30%;
+    width:200px; height:200px; border-radius:50%;
+    background: rgba(255,255,255,0.04); pointer-events:none;
+  }
+  .ds-header-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; }
+  .ds-tag {
+    font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gc-gold-light); margin-bottom: 10px;
+  }
+  .ds-header h1 {
+    font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700;
+    color: var(--white); line-height: 1.2; margin-bottom: 8px;
+  }
+  .ds-header p {
+    font-size: 14px; color: rgba(255,255,255,0.65); max-width: 560px; line-height: 1.6;
+  }
+  .ds-header-meta {
+    display: flex; gap: 24px; margin-top: 24px; flex-wrap: wrap;
+  }
+  .ds-header-meta span {
+    font-size: 12px; color: rgba(255,255,255,0.55);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .ds-header-meta strong { color: rgba(255,255,255,0.85); }
+
+  /* ── LAYOUT ── */
+  .ds-body { max-width: 1100px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  /* ── SECTION ── */
+  .ds-section { margin-bottom: 56px; }
+  .ds-section-title {
+    font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600;
+    color: var(--text-dark); margin-bottom: 6px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .ds-section-title::after {
+    content:''; flex:1; height:1px; background: var(--border);
+  }
+  .ds-section-sub {
+    font-size: 12.5px; color: var(--text-muted); margin-bottom: 24px;
+  }
+
+  /* ── TOKEN GRID ── */
+  .token-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+
+  /* ── COLOR SWATCH ── */
+  .swatch {
+    border-radius: 12px; overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.07);
+    background: var(--white);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .swatch-color { height: 72px; width: 100%; }
+  .swatch-info  { padding: 10px 12px; }
+  .swatch-name  { font-size: 12px; font-weight: 700; color: var(--text-dark); margin-bottom: 2px; }
+  .swatch-hex   { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); margin-bottom: 2px; }
+  .swatch-var   { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #a0acb0; }
+
+  /* ── TYPOGRAPHY ROWS ── */
+  .type-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: 14px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .type-table th {
+    text-align: left; padding: 10px 16px; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted);
+    background: var(--off-white); border-bottom: 1px solid var(--border);
+  }
+  .type-table td { padding: 14px 16px; border-bottom: 1px solid #f0f3f1; vertical-align: middle; }
+  .type-table tr:last-child td { border-bottom: none; }
+  .type-table tr:hover td { background: var(--gc-green-pale); }
+  .type-sample { line-height: 1.3; }
+  .mono { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--blue); background: var(--blue-pale); padding: 2px 7px; border-radius: 5px; }
+
+  /* ── SPACING ── */
+  .spacing-row {
+    display: flex; align-items: center; gap: 16px;
+    padding: 10px 16px; background: var(--white);
+    border-bottom: 1px solid #f0f3f1;
+  }
+  .spacing-row:first-child { border-radius: 14px 14px 0 0; }
+  .spacing-row:last-child  { border-radius: 0 0 14px 14px; border-bottom: none; }
+  .spacing-box { background: var(--gc-green); border-radius: 3px; flex-shrink: 0; }
+  .spacing-label { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--text-dark); font-weight: 500; min-width: 60px; }
+  .spacing-use   { font-size: 12px; color: var(--text-muted); }
+  .spacing-wrap  { background: var(--white); border-radius: 14px; border: 1px solid var(--border); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+
+  /* ── BORDER RADIUS ── */
+  .radius-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 14px; }
+  .radius-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px 16px; text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .radius-demo {
+    width: 60px; height: 60px; background: var(--gc-green-pale);
+    border: 2px solid var(--gc-green); margin: 0 auto 12px;
+  }
+  .radius-value { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; color: var(--gc-green-dark); margin-bottom: 4px; }
+  .radius-use   { font-size: 11px; color: var(--text-muted); }
+
+  /* ── SHADOW ── */
+  .shadow-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+  .shadow-card {
+    background: var(--white); border-radius: 12px;
+    padding: 24px 20px; text-align: center;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+  .shadow-demo {
+    width: 80px; height: 50px; background: var(--white);
+    border-radius: 10px; margin: 0 auto 16px;
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .shadow-name  { font-size: 12px; font-weight: 700; color: var(--text-dark); margin-bottom: 4px; }
+  .shadow-value { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); line-height: 1.5; word-break: break-all; }
+  .shadow-use   { font-size: 11px; color: var(--text-muted); margin-top: 6px; font-style: italic; }
+
+  /* ── GRADIENT ── */
+  .gradient-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+  .gradient-card {
+    border-radius: 14px; overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.07);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  }
+  .gradient-preview { height: 80px; }
+  .gradient-info    { background: var(--white); padding: 12px 14px; }
+  .gradient-name    { font-size: 12px; font-weight: 700; color: var(--text-dark); margin-bottom: 4px; }
+  .gradient-value   { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); line-height: 1.5; word-break: break-all; }
+  .gradient-use     { font-size: 11px; color: var(--text-muted); margin-top: 5px; font-style: italic; }
+
+  /* ── BORDER ── */
+  .border-list { background: var(--white); border-radius: 14px; border: 1px solid var(--border); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .border-row  { display: flex; align-items: center; gap: 20px; padding: 14px 18px; border-bottom: 1px solid #f0f3f1; }
+  .border-row:last-child { border-bottom: none; }
+  .border-demo { width: 80px; height: 32px; border-radius: 8px; flex-shrink: 0; }
+  .border-name { font-size: 12.5px; font-weight: 600; color: var(--text-dark); min-width: 140px; }
+  .border-val  { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--blue); background: var(--blue-pale); padding: 2px 8px; border-radius: 5px; }
+  .border-where{ font-size: 11.5px; color: var(--text-muted); }
+
+  /* ── COMPONENT TOKENS ── */
+  .comp-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: 14px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .comp-table th { text-align: left; padding: 10px 16px; font-size: 10.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); background: var(--off-white); border-bottom: 1px solid var(--border); }
+  .comp-table td { padding: 12px 16px; border-bottom: 1px solid #f0f3f1; font-size: 12.5px; }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .comp-table tr:hover td { background: var(--gc-green-pale); }
+  .chip {
+    display: inline-block; padding: 3px 10px; border-radius: 10px;
+    font-size: 11px; font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="ds-header">
+  <div class="ds-header-inner">
+    <div class="ds-tag">Design System · v1.0</div>
+    <h1>Gordon College<br>Faculty Ranking Portal</h1>
+    <p>All design tokens, typography, colors, spacing, shadows, and component styles for the Faculty Administration Portal. Paste into Figma or share with team members.</p>
+    <div class="ds-header-meta">
+      <span>🎨 <strong>Colors</strong> — 18 tokens</span>
+      <span>✏️ <strong>Fonts</strong> — 2 families</span>
+      <span>📐 <strong>Spacing</strong> — 9 steps</span>
+      <span>🔲 <strong>Radius</strong> — 8 steps</span>
+      <span>💧 <strong>Shadows</strong> — 5 levels</span>
+      <span>🌈 <strong>Gradients</strong> — 6 styles</span>
+    </div>
+  </div>
+</div>
+
+<div class="ds-body">
+
+  <!-- ══ 1. COLORS ══ -->
+  <div class="ds-section">
+    <div class="ds-section-title">🎨 Color Palette</div>
+    <div class="ds-section-sub">All colors used across the portal. Primary brand colors are GC Green and GC Gold.</div>
+
+    <p style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;">Brand — Primary</p>
+    <div class="token-grid" style="margin-bottom:24px;">
+      <div class="swatch"><div class="swatch-color" style="background:#134f2c;"></div><div class="swatch-info"><div class="swatch-name">GC Green Dark</div><div class="swatch-hex">#134f2c</div><div class="swatch-var">--gc-green-dark</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#1a6b3c;"></div><div class="swatch-info"><div class="swatch-name">GC Green</div><div class="swatch-hex">#1a6b3c</div><div class="swatch-var">--gc-green</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#228b4e;"></div><div class="swatch-info"><div class="swatch-name">GC Green Light</div><div class="swatch-hex">#228b4e</div><div class="swatch-var">--gc-green-light</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#eef7f2;border:1px solid #c8e6d4;"></div><div class="swatch-info"><div class="swatch-name">GC Green Pale</div><div class="swatch-hex">#eef7f2</div><div class="swatch-var">--gc-green-pale</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#c9a84c;"></div><div class="swatch-info"><div class="swatch-name">GC Gold</div><div class="swatch-hex">#c9a84c</div><div class="swatch-var">--gc-gold</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#e8c96b;"></div><div class="swatch-info"><div class="swatch-name">GC Gold Light</div><div class="swatch-hex">#e8c96b</div><div class="swatch-var">--gc-gold-light</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#fdf8ec;border:1px solid #f0e4b8;"></div><div class="swatch-info"><div class="swatch-name">GC Gold Pale</div><div class="swatch-hex">#fdf8ec</div><div class="swatch-var">--gc-gold-pale</div></div></div>
+    </div>
+
+    <p style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;">Neutral — Backgrounds & Surfaces</p>
+    <div class="token-grid" style="margin-bottom:24px;">
+      <div class="swatch"><div class="swatch-color" style="background:#ffffff;border-bottom:1px solid #eee;"></div><div class="swatch-info"><div class="swatch-name">White</div><div class="swatch-hex">#ffffff</div><div class="swatch-var">--white</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#f8f7f4;"></div><div class="swatch-info"><div class="swatch-name">Off White</div><div class="swatch-hex">#f8f7f4</div><div class="swatch-var">--off-white</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#f1f3f1;"></div><div class="swatch-info"><div class="swatch-name">Surface</div><div class="swatch-hex">#f1f3f1</div><div class="swatch-var">--surface</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#dde5df;"></div><div class="swatch-info"><div class="swatch-name">Border</div><div class="swatch-hex">#dde5df</div><div class="swatch-var">--border</div></div></div>
+    </div>
+
+    <p style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;">Text</p>
+    <div class="token-grid" style="margin-bottom:24px;">
+      <div class="swatch"><div class="swatch-color" style="background:#1a1a1a;"></div><div class="swatch-info"><div class="swatch-name">Text Dark</div><div class="swatch-hex">#1a1a1a</div><div class="swatch-var">--text-dark</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#3a4a3e;"></div><div class="swatch-info"><div class="swatch-name">Text Mid</div><div class="swatch-hex">#3a4a3e</div><div class="swatch-var">--text-mid</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#6b7c70;"></div><div class="swatch-info"><div class="swatch-name">Text Muted</div><div class="swatch-hex">#6b7c70</div><div class="swatch-var">--text-muted</div></div></div>
+    </div>
+
+    <p style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;">Semantic — Status Colors</p>
+    <div class="token-grid">
+      <div class="swatch"><div class="swatch-color" style="background:#c0392b;"></div><div class="swatch-info"><div class="swatch-name">Danger</div><div class="swatch-hex">#c0392b</div><div class="swatch-var">--danger</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#fdf0ee;border:1px solid #f5c6c6;"></div><div class="swatch-info"><div class="swatch-name">Danger Pale</div><div class="swatch-hex">#fdf0ee</div><div class="swatch-var">--danger-pale</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#2471a3;"></div><div class="swatch-info"><div class="swatch-name">Blue</div><div class="swatch-hex">#2471a3</div><div class="swatch-var">--blue</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#eaf3fb;border:1px solid #c8dff0;"></div><div class="swatch-info"><div class="swatch-name">Blue Pale</div><div class="swatch-hex">#eaf3fb</div><div class="swatch-var">--blue-pale</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#d35400;"></div><div class="swatch-info"><div class="swatch-name">Orange</div><div class="swatch-hex">#d35400</div><div class="swatch-var">--orange</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#fef0e6;border:1px solid #f5d0b0;"></div><div class="swatch-info"><div class="swatch-name">Orange Pale</div><div class="swatch-hex">#fef0e6</div><div class="swatch-var">--orange-pale</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#27ae60;"></div><div class="swatch-info"><div class="swatch-name">Success Green</div><div class="swatch-hex">#27ae60</div><div class="swatch-var">— (inline)</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#eafaf1;border:1px solid #a9dfbf;"></div><div class="swatch-info"><div class="swatch-name">Success Pale</div><div class="swatch-hex">#eafaf1</div><div class="swatch-var">— (inline)</div></div></div>
+    </div>
+  </div>
+
+  <!-- ══ 2. TYPOGRAPHY ══ -->
+  <div class="ds-section">
+    <div class="ds-section-title">✏️ Typography</div>
+    <div class="ds-section-sub">Two font families. Playfair Display for headings and display text. Source Sans 3 for all UI and body text.</div>
+
+    <table class="type-table">
+      <thead>
+        <tr>
+          <th>Role</th>
+          <th>Sample</th>
+          <th>Family</th>
+          <th>Size</th>
+          <th>Weight</th>
+          <th>Used For</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="chip" style="background:var(--gc-green-pale);color:var(--gc-green);">Display</span></td><td><span class="type-sample" style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;">Dashboard</span></td><td>Playfair Display</td><td><span class="mono">28px</span></td><td><span class="mono">700</span></td><td>Page hero score, large numbers</td></tr>
+        <tr><td><span class="chip" style="background:var(--gc-green-pale);color:var(--gc-green);">H1</span></td><td><span class="type-sample" style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600;">David Bryan B. Candido</span></td><td>Playfair Display</td><td><span class="mono">22px</span></td><td><span class="mono">600</span></td><td>Faculty name in hero card</td></tr>
+        <tr><td><span class="chip" style="background:var(--gc-green-pale);color:var(--gc-green);">H2</span></td><td><span class="type-sample" style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;">Score Breakdown</span></td><td>Playfair Display</td><td><span class="mono">18px</span></td><td><span class="mono">600</span></td><td>Panel titles, section headers</td></tr>
+        <tr><td><span class="chip" style="background:var(--gc-green-pale);color:var(--gc-green);">H3</span></td><td><span class="type-sample" style="font-family:'Playfair Display',serif;font-size:15px;font-weight:600;">Career Advancement Areas</span></td><td>Playfair Display</td><td><span class="mono">15px</span></td><td><span class="mono">600</span></td><td>Card headings, modal titles</td></tr>
+        <tr><td><span class="chip" style="background:var(--blue-pale);color:var(--blue);">Body 1</span></td><td><span class="type-sample" style="font-size:14px;font-weight:400;">Submit each area individually before the deadline.</span></td><td>Source Sans 3</td><td><span class="mono">14px</span></td><td><span class="mono">400</span></td><td>Body text, descriptions</td></tr>
+        <tr><td><span class="chip" style="background:var(--blue-pale);color:var(--blue);">Body 2</span></td><td><span class="type-sample" style="font-size:13px;font-weight:400;">File uploaded: Awards_Recognition_2025.pdf</span></td><td>Source Sans 3</td><td><span class="mono">13px</span></td><td><span class="mono">400</span></td><td>Secondary body, file names</td></tr>
+        <tr><td><span class="chip" style="background:var(--blue-pale);color:var(--blue);">Label</span></td><td><span class="type-sample" style="font-size:12px;font-weight:600;">Educational Qualifications</span></td><td>Source Sans 3</td><td><span class="mono">12px</span></td><td><span class="mono">600</span></td><td>Card labels, button text</td></tr>
+        <tr><td><span class="chip" style="background:var(--blue-pale);color:var(--blue);">Caption</span></td><td><span class="type-sample" style="font-size:11px;color:var(--text-muted);">Today, 6:30 PM · HR Department</span></td><td>Source Sans 3</td><td><span class="mono">11px</span></td><td><span class="mono">400</span></td><td>Timestamps, meta text, captions</td></tr>
+        <tr><td><span class="chip" style="background:var(--gc-gold-pale);color:#7d5a10;">Overline</span></td><td><span class="type-sample" style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);">Current Cycle</span></td><td>Source Sans 3</td><td><span class="mono">10px</span></td><td><span class="mono">700</span></td><td>Section labels, eyebrow text</td></tr>
+        <tr><td><span class="chip" style="background:var(--gc-gold-pale);color:#7d5a10;">Micro</span></td><td><span class="type-sample" style="font-size:9px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--gc-gold-light);">Faculty Administration Portal</span></td><td>Source Sans 3</td><td><span class="mono">9px</span></td><td><span class="mono">700</span></td><td>Sidebar subtitle, badge labels</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ══ 3. SPACING ══ -->
+  <div class="ds-section">
+    <div class="ds-section-title">📐 Spacing Scale</div>
+    <div class="ds-section-sub">Consistent spacing units used for padding, margins, and gaps throughout the portal.</div>
+    <div class="spacing-wrap">
+      <div class="spacing-row"><div class="spacing-box" style="width:4px;height:16px;"></div><span class="spacing-label">4px</span><span class="mono">0.25rem</span>&nbsp;&nbsp;<span class="spacing-use">Badge padding, tight gaps</span></div>
+      <div class="spacing-row"><div class="spacing-box" style="width:6px;height:16px;"></div><span class="spacing-label">6px</span><span class="mono">0.375rem</span>&nbsp;&nbsp;<span class="spacing-use">Icon gap, small padding</span></div>
+      <div class="spacing-row"><div class="spacing-box" style="width:8px;height:16px;"></div><span class="spacing-label">8px</span><span class="mono">0.5rem</span>&nbsp;&nbsp;<span class="spacing-use">Nav item gap, chip padding</span></div>
+      <div class="spacing-row"><div class="spacing-box" style="width:10px;height:16px;"></div><span class="spacing-label">10px</span><span class="mono">0.625rem</span>&nbsp;&nbsp;<span class="spacing-use">Form field padding, row gap</span></div>
+      <div class="spacing-row"><div class="spacing-box" style="width:14px;height:16px;"></div><span class="spacing-label">14px</span><span class="mono">0.875rem</span>&nbsp;&nbsp;<span class="spacing-use">Card inner gap, list items</span></div>
+      <div class="spacing-row"><div class="spacing-box" style="width:18px;height:16px;"></div><span class="spacing-label">18px</span><span class="mono">1.125rem</span>&nbsp;&nbsp;<span class="spacing-use">Card padding (sm)</span></div>
+      <div class="spacing-row"><div class="spacing-box" style="width:24px;height:16px;"></div><span class="spacing-label">24px</span><span class="mono">1.5rem</span>&nbsp;&nbsp;<span class="spacing-use">Section gap, card padding (md)</span></div>
+      <div class="spacing-row"><div class="spacing-box" style="width:28px;height:16px;"></div><span class="spacing-label">28px</span><span class="mono">1.75rem</span>&nbsp;&nbsp;<span class="spacing-use">Hero card padding, page padding</span></div>
+      <div class="spacing-row"><div class="spacing-box" style="width:48px;height:16px;"></div><span class="spacing-label">48px</span><span class="mono">3rem</span>&nbsp;&nbsp;<span class="spacing-use">Section margin, page top padding</span></div>
+    </div>
+  </div>
+
+  <!-- ══ 4. BORDER RADIUS ══ -->
+  <div class="ds-section">
+    <div class="ds-section-title">🔲 Border Radius</div>
+    <div class="ds-section-sub">Consistent corner radii. Larger radius for cards and modals, smaller for badges and inputs.</div>
+    <div class="radius-grid">
+      <div class="radius-card"><div class="radius-demo" style="border-radius:4px;"></div><div class="radius-value">4px</div><div class="radius-use">Tiny chips, micro badges</div></div>
+      <div class="radius-card"><div class="radius-demo" style="border-radius:6px;"></div><div class="radius-value">6px</div><div class="radius-use">Download btn, small tags</div></div>
+      <div class="radius-card"><div class="radius-demo" style="border-radius:7px;"></div><div class="radius-value">7px</div><div class="radius-use">File rows, template rows</div></div>
+      <div class="radius-card"><div class="radius-demo" style="border-radius:8px;"></div><div class="radius-value">8px</div><div class="radius-use">Inputs, form fields, buttons</div></div>
+      <div class="radius-card"><div class="radius-demo" style="border-radius:9px;"></div><div class="radius-value">9px</div><div class="radius-use">Primary action buttons</div></div>
+      <div class="radius-card"><div class="radius-demo" style="border-radius:10px;"></div><div class="radius-value">10px</div><div class="radius-use">Notification items, banners</div></div>
+      <div class="radius-card"><div class="radius-demo" style="border-radius:12px;"></div><div class="radius-value">12px</div><div class="radius-use">Area cards, history cards</div></div>
+      <div class="radius-card"><div class="radius-demo" style="border-radius:14px;"></div><div class="radius-value">14px</div><div class="radius-use">Panels, tables, profile cards</div></div>
+      <div class="radius-card"><div class="radius-demo" style="border-radius:16px;"></div><div class="radius-value">16px</div><div class="radius-use">Hero card, modal, profile hero</div></div>
+      <div class="radius-card"><div class="radius-demo" style="border-radius:20px;"></div><div class="radius-value">20px</div><div class="radius-use">Pill badges, filter tabs</div></div>
+      <div class="radius-card"><div class="radius-demo" style="border-radius:50%;"></div><div class="radius-value">50%</div><div class="radius-use">Avatar circles, dot indicators</div></div>
+    </div>
+  </div>
+
+  <!-- ══ 5. SHADOWS ══ -->
+  <div class="ds-section">
+    <div class="ds-section-title">💧 Shadows</div>
+    <div class="ds-section-sub">Five elevation levels. Used to communicate hierarchy and depth between layers.</div>
+    <div class="shadow-grid">
+      <div class="shadow-card" style="box-shadow:0 1px 4px rgba(0,0,0,0.04);">
+        <div class="shadow-demo" style="box-shadow:0 1px 4px rgba(0,0,0,0.08);"></div>
+        <div class="shadow-name">Flat / Level 1</div>
+        <div class="shadow-value">0 1px 4px rgba(0,0,0,0.04)</div>
+        <div class="shadow-use">Inline rows, subtle lift</div>
+      </div>
+      <div class="shadow-card" style="box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+        <div class="shadow-demo" style="box-shadow:0 2px 8px rgba(0,0,0,0.08);"></div>
+        <div class="shadow-name">Card / Level 2</div>
+        <div class="shadow-value">0 2px 8px rgba(0,0,0,0.06)</div>
+        <div class="shadow-use">Area cards, panels, tables</div>
+      </div>
+      <div class="shadow-card" style="box-shadow:0 4px 14px rgba(26,107,60,0.25);">
+        <div class="shadow-demo" style="box-shadow:0 4px 14px rgba(26,107,60,0.25);"></div>
+        <div class="shadow-name">Button / Colored</div>
+        <div class="shadow-value">0 4px 14px rgba(26,107,60,0.25)</div>
+        <div class="shadow-use">Primary green buttons</div>
+      </div>
+      <div class="shadow-card" style="box-shadow:0 8px 32px rgba(26,107,60,0.22);">
+        <div class="shadow-demo" style="box-shadow:0 8px 32px rgba(26,107,60,0.22);"></div>
+        <div class="shadow-name">Hero / Level 4</div>
+        <div class="shadow-value">0 8px 32px rgba(26,107,60,0.22)</div>
+        <div class="shadow-use">Hero card, profile banner</div>
+      </div>
+      <div class="shadow-card" style="box-shadow:0 12px 40px rgba(0,0,0,0.13);">
+        <div class="shadow-demo" style="box-shadow:0 12px 40px rgba(0,0,0,0.13);"></div>
+        <div class="shadow-name">Overlay / Level 5</div>
+        <div class="shadow-value">0 12px 40px rgba(0,0,0,0.13)</div>
+        <div class="shadow-use">Notification dropdown, modals</div>
+      </div>
+      <div class="shadow-card" style="box-shadow:0 20px 60px rgba(0,0,0,0.2);">
+        <div class="shadow-demo" style="box-shadow:0 20px 60px rgba(0,0,0,0.2);"></div>
+        <div class="shadow-name">Modal / Level 6</div>
+        <div class="shadow-value">0 20px 60px rgba(0,0,0,0.2)</div>
+        <div class="shadow-use">Logout modal dialog</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 6. GRADIENTS ══ -->
+  <div class="ds-section">
+    <div class="ds-section-title">🌈 Gradients</div>
+    <div class="ds-section-sub">All gradient backgrounds used across sidebar, hero cards, buttons, and banners.</div>
+    <div class="gradient-grid">
+      <div class="gradient-card">
+        <div class="gradient-preview" style="background:linear-gradient(180deg,#134f2c 0%,#1a6b3c 60%,#1e5c35 100%);"></div>
+        <div class="gradient-info"><div class="gradient-name">Sidebar Background</div><div class="gradient-value">linear-gradient(180deg, #134f2c 0%, #1a6b3c 60%, #1e5c35 100%)</div><div class="gradient-use">Main sidebar nav</div></div>
+      </div>
+      <div class="gradient-card">
+        <div class="gradient-preview" style="background:linear-gradient(135deg,#134f2c 0%,#1a6b3c 55%,#22704a 100%);"></div>
+        <div class="gradient-info"><div class="gradient-name">Hero / Banner</div><div class="gradient-value">linear-gradient(135deg, #134f2c 0%, #1a6b3c 55%, #22704a 100%)</div><div class="gradient-use">Hero card, profile banner, page header</div></div>
+      </div>
+      <div class="gradient-card">
+        <div class="gradient-preview" style="background:linear-gradient(135deg,#1a6b3c,#228b4e);"></div>
+        <div class="gradient-info"><div class="gradient-name">Primary Button</div><div class="gradient-value">linear-gradient(135deg, #1a6b3c, #228b4e)</div><div class="gradient-use">Submit Application, Login, nav active</div></div>
+      </div>
+      <div class="gradient-card">
+        <div class="gradient-preview" style="background:linear-gradient(90deg,#1a6b3c,#228b4e);"></div>
+        <div class="gradient-info"><div class="gradient-name">Progress Bar</div><div class="gradient-value">linear-gradient(90deg, #1a6b3c, #228b4e)</div><div class="gradient-use">Area score bars, mini progress fill</div></div>
+      </div>
+      <div class="gradient-card">
+        <div class="gradient-preview" style="background:linear-gradient(135deg,#27ae60,#2ecc71);"></div>
+        <div class="gradient-info"><div class="gradient-name">Submitted State</div><div class="gradient-value">linear-gradient(135deg, #27ae60, #2ecc71)</div><div class="gradient-use">✅ Submitted button on area cards</div></div>
+      </div>
+      <div class="gradient-card">
+        <div class="gradient-preview" style="background:linear-gradient(135deg,#c0392b,#e74c3c);"></div>
+        <div class="gradient-info"><div class="gradient-name">Danger / Logout</div><div class="gradient-value">linear-gradient(135deg, #c0392b, #e74c3c)</div><div class="gradient-use">Logout confirm button</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 7. BORDERS ══ -->
+  <div class="ds-section">
+    <div class="ds-section-title">📏 Border Styles</div>
+    <div class="ds-section-sub">Four border types used to define containers, inputs, and interactive states.</div>
+    <div class="border-list">
+      <div class="border-row"><div class="border-demo" style="border:1px solid #dde5df;"></div><div class="border-name">Default Border</div><span class="border-val">1px solid #dde5df</span>&nbsp;&nbsp;<span class="border-where">Cards, panels, tables, dropdowns</span></div>
+      <div class="border-row"><div class="border-demo" style="border:1.5px solid #dde5df;"></div><div class="border-name">Medium Border</div><span class="border-val">1.5px solid var(--border)</span>&nbsp;&nbsp;<span class="border-where">Inputs, buttons, reviewer boxes</span></div>
+      <div class="border-row"><div class="border-demo" style="border:1.5px solid #1a6b3c;"></div><div class="border-name">Focus / Active Border</div><span class="border-val">1.5px solid var(--gc-green)</span>&nbsp;&nbsp;<span class="border-where">Focused input, active card</span></div>
+      <div class="border-row"><div class="border-demo" style="border:1.5px dashed #c8d4cb;"></div><div class="border-name">Dashed Upload Border</div><span class="border-val">1.5px dashed #c8d4cb</span>&nbsp;&nbsp;<span class="border-where">Attach document button</span></div>
+      <div class="border-row"><div class="border-demo" style="border-left:2px solid #1a6b3c;"></div><div class="border-name">Left Accent Border</div><span class="border-val">2px solid var(--gc-green) (left only)</span>&nbsp;&nbsp;<span class="border-where">Expandable area descriptions</span></div>
+      <div class="border-row"><div class="border-demo" style="border:1px solid rgba(255,255,255,0.1);background:#1a6b3c;"></div><div class="border-name">White Subtle (on dark)</div><span class="border-val">1px solid rgba(255,255,255,0.1)</span>&nbsp;&nbsp;<span class="border-where">Sidebar dividers, brand border</span></div>
+    </div>
+  </div>
+
+  <!-- ══ 8. COMPONENT TOKENS ══ -->
+  <div class="ds-section">
+    <div class="ds-section-title">🧩 Component Tokens</div>
+    <div class="ds-section-sub">Specific design values tied to individual UI components.</div>
+    <table class="comp-table">
+      <thead>
+        <tr><th>Component</th><th>Property</th><th>Value</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Sidebar</strong></td><td>Width</td><td><span class="mono">240px</span></td></tr>
+        <tr><td><strong>Sidebar</strong></td><td>Mobile height (bottom nav)</td><td><span class="mono">60px</span></td></tr>
+        <tr><td><strong>Topbar</strong></td><td>Height</td><td><span class="mono">64px</span></td></tr>
+        <tr><td><strong>Topbar</strong></td><td>Background</td><td><span class="mono">#ffffff · border-bottom 1px solid var(--border)</span></td></tr>
+        <tr><td><strong>Hero Card</strong></td><td>Padding</td><td><span class="mono">26px 28px</span></td></tr>
+        <tr><td><strong>Hero Card</strong></td><td>Border Radius</td><td><span class="mono">16px</span></td></tr>
+        <tr><td><strong>Area Card</strong></td><td>Padding</td><td><span class="mono">15px</span></td></tr>
+        <tr><td><strong>Area Card</strong></td><td>Border Radius</td><td><span class="mono">12px</span></td></tr>
+        <tr><td><strong>Area Card — Submitted</strong></td><td>Border color</td><td><span class="mono">1.5px solid #a9dfbf</span></td></tr>
+        <tr><td><strong>Area Card — Draft</strong></td><td>Border color</td><td><span class="mono">1.5px solid var(--gc-gold)</span></td></tr>
+        <tr><td><strong>Area Card — Pending</strong></td><td>Border color</td><td><span class="mono">1.5px solid var(--border)</span></td></tr>
+        <tr><td><strong>Input Field</strong></td><td>Padding</td><td><span class="mono">12px 16px</span></td></tr>
+        <tr><td><strong>Input Field</strong></td><td>Border Radius</td><td><span class="mono">8px</span></td></tr>
+        <tr><td><strong>Primary Button</strong></td><td>Padding</td><td><span class="mono">13px · full width</span></td></tr>
+        <tr><td><strong>Primary Button</strong></td><td>Border Radius</td><td><span class="mono">8px–9px</span></td></tr>
+        <tr><td><strong>Template Row</strong></td><td>Background</td><td><span class="mono">var(--gc-gold-pale) · border 1px rgba(201,168,76,0.3)</span></td></tr>
+        <tr><td><strong>Score Hidden Banner</strong></td><td>Background</td><td><span class="mono">rgba(26,107,60,0.06) · border-left 3px solid var(--gc-green)</span></td></tr>
+        <tr><td><strong>Score Published Banner</strong></td><td>Background</td><td><span class="mono">#eafaf1 · border 1.5px solid #a9dfbf</span></td></tr>
+        <tr><td><strong>Notification Dropdown</strong></td><td>Width</td><td><span class="mono">340px</span></td></tr>
+        <tr><td><strong>Notification Dropdown</strong></td><td>Max-height of list</td><td><span class="mono">280px (scrollable)</span></td></tr>
+        <tr><td><strong>Logout Modal</strong></td><td>Max Width</td><td><span class="mono">360px · centered overlay</span></td></tr>
+        <tr><td><strong>Overlay Backdrop</strong></td><td>Background</td><td><span class="mono">rgba(0,0,0,0.45)</span></td></tr>
+        <tr><td><strong>Nav Badge</strong></td><td>Background</td><td><span class="mono">var(--gc-gold) · color white · border-radius 10px</span></td></tr>
+        <tr><td><strong>Unread Dot</strong></td><td>Size + Color</td><td><span class="mono">8px × 8px · var(--gc-green) · border-radius 50%</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ══ 9. ANIMATIONS ══ -->
+  <div class="ds-section">
+    <div class="ds-section-title">✨ Animations & Transitions</div>
+    <div class="ds-section-sub">Consistent motion language. All transitions use ease timing. Entrances use fadeUp or slideIn.</div>
+    <table class="comp-table">
+      <thead><tr><th>Name</th><th>Keyframe</th><th>Duration</th><th>Used For</th></tr></thead>
+      <tbody>
+        <tr><td><strong>fadeUp</strong></td><td><span class="mono">opacity 0→1 · translateY 14px→0</span></td><td><span class="mono">0.5s ease</span></td><td>Cards, stats, panels on page load</td></tr>
+        <tr><td><strong>sideIn</strong></td><td><span class="mono">opacity 0→1 · translateX -16px→0</span></td><td><span class="mono">0.5s ease</span></td><td>Score sidebar, left-side panels</td></tr>
+        <tr><td><strong>scaleIn</strong></td><td><span class="mono">opacity 0→1 · scale 0.93→1</span></td><td><span class="mono">0.2s ease</span></td><td>Logout modal entrance</td></tr>
+        <tr><td><strong>fadeIn</strong></td><td><span class="mono">opacity 0→1</span></td><td><span class="mono">0.2s ease</span></td><td>Modal overlay backdrop</td></tr>
+        <tr><td><strong>Hover — Button</strong></td><td><span class="mono">opacity 0.9 · translateY -1px</span></td><td><span class="mono">0.15s–0.2s</span></td><td>All primary action buttons</td></tr>
+        <tr><td><strong>Hover — Card</strong></td><td><span class="mono">translateY -2px · box-shadow increase</span></td><td><span class="mono">0.2s</span></td><td>History cards, area cards</td></tr>
+        <tr><td><strong>Toggle Arrow</strong></td><td><span class="mono">rotate 0→90deg</span></td><td><span class="mono">0.25s ease</span></td><td>Expandable area description</td></tr>
+        <tr><td><strong>Stagger Delay</strong></td><td><span class="mono">animation-delay: 0.1s–0.6s</span></td><td>—</td><td>Sequential card reveals on load</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="text-align:center;padding:32px 0 0;border-top:1px solid var(--border);">
+    <p style="font-family:'Playfair Display',serif;font-size:16px;color:var(--gc-green-dark);font-weight:600;margin-bottom:6px;">Gordon College — Faculty Ranking Portal</p>
+    <p style="font-size:12px;color:var(--text-muted);">Design System v1.0 · Generated March 2026 · For internal use by the development and design team</p>
+  </div>
+
+</div>
+</body>
+</html>
