@@ -203,16 +203,17 @@
 <!-- HEADER -->
 <div class="ds-header">
   <div class="ds-header-inner">
-    <div class="ds-tag">Design System · v1.0</div>
+    <div class="ds-tag">Design System · v2.0</div>
     <h1>Gordon College<br>Faculty Ranking Portal</h1>
     <p>All design tokens, typography, colors, spacing, shadows, and component styles for the Faculty Administration Portal. Paste into Figma or share with team members.</p>
     <div class="ds-header-meta">
       <span>🎨 <strong>Colors</strong> — 18 tokens</span>
       <span>✏️ <strong>Fonts</strong> — 2 families</span>
       <span>📐 <strong>Spacing</strong> — 9 steps</span>
-      <span>🔲 <strong>Radius</strong> — 8 steps</span>
-      <span>💧 <strong>Shadows</strong> — 5 levels</span>
+      <span>🔲 <strong>Radius</strong> — 11 steps</span>
+      <span>💧 <strong>Shadows</strong> — 6 levels</span>
       <span>🌈 <strong>Gradients</strong> — 6 styles</span>
+      <span>🧩 <strong>Components</strong> — 10 sections</span>
     </div>
   </div>
 </div>
@@ -476,10 +477,119 @@
     </table>
   </div>
 
+  <!-- ══ 10. NEW VIEWS & COMPONENTS (v2.0) ══ -->
+  <div class="ds-section">
+    <div class="ds-section-title">🆕 New Components — v2.0</div>
+    <div class="ds-section-sub">All components added after the initial design system. Includes Notifications, Profile, Change Password, Logout Modal, Score Collapse, and Loading Screen.</div>
+
+    <table class="comp-table">
+      <thead><tr><th>Component</th><th>Property</th><th>Value</th></tr></thead>
+      <tbody>
+
+        <!-- TOPBAR LOGOUT (MOBILE) -->
+        <tr><td colspan="3" style="background:var(--off-white);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);">Topbar Logout Button (mobile only, ≤640px)</td></tr>
+        <tr><td><strong>Topbar Logout</strong></td><td>Background</td><td><span class="mono">#fdf0ee (--danger-pale)</span></td></tr>
+        <tr><td><strong>Topbar Logout</strong></td><td>Border</td><td><span class="mono">1.5px solid #f5c6c6</span></td></tr>
+        <tr><td><strong>Topbar Logout</strong></td><td>Text color</td><td><span class="mono">var(--danger) · #c0392b</span></td></tr>
+        <tr><td><strong>Topbar Logout</strong></td><td>Font</td><td><span class="mono">12px · 700 · Source Sans 3</span></td></tr>
+        <tr><td><strong>Topbar Logout</strong></td><td>Border radius</td><td><span class="mono">8px</span></td></tr>
+        <tr><td><strong>Topbar Logout</strong></td><td>Padding</td><td><span class="mono">6px 12px</span></td></tr>
+        <tr><td><strong>Topbar Logout</strong></td><td>Visibility</td><td><span class="mono">display:none on desktop · display:flex on ≤640px</span></td></tr>
+
+        <!-- LOGOUT MODAL -->
+        <tr><td colspan="3" style="background:var(--off-white);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);">Logout Modal</td></tr>
+        <tr><td><strong>Modal Overlay</strong></td><td>Background</td><td><span class="mono">rgba(0,0,0,0.45)</span></td></tr>
+        <tr><td><strong>Modal Box</strong></td><td>Max width</td><td><span class="mono">360px · centered</span></td></tr>
+        <tr><td><strong>Modal Box</strong></td><td>Padding</td><td><span class="mono">32px 28px</span></td></tr>
+        <tr><td><strong>Modal Box</strong></td><td>Border radius</td><td><span class="mono">16px</span></td></tr>
+        <tr><td><strong>Modal Box</strong></td><td>Shadow</td><td><span class="mono">0 20px 60px rgba(0,0,0,0.2)</span></td></tr>
+        <tr><td><strong>Modal Icon</strong></td><td>Size / background</td><td><span class="mono">52px circle · background #fef0f0 · border #f5c6c6</span></td></tr>
+        <tr><td><strong>Cancel Button</strong></td><td>Style</td><td><span class="mono">border 1.5px solid var(--border) · bg white · text-muted · radius 9px</span></td></tr>
+        <tr><td><strong>Confirm Button</strong></td><td>Style</td><td><span class="mono">linear-gradient(135deg, #c0392b, #e74c3c) · white text · shadow 0 4px 14px rgba(192,57,43,0.3)</span></td></tr>
+        <tr><td><strong>Modal Entry</strong></td><td>Animation</td><td><span class="mono">scaleIn 0.2s ease (scale 0.93→1 + opacity 0→1)</span></td></tr>
+        <tr><td><strong>Overlay Entry</strong></td><td>Animation</td><td><span class="mono">fadeIn 0.2s ease</span></td></tr>
+
+        <!-- SCORE COLLAPSE -->
+        <tr><td colspan="3" style="background:var(--off-white);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);">Score Breakdown Collapse (tablet + mobile ≤900px)</td></tr>
+        <tr><td><strong>Collapse Button</strong></td><td>Style</td><td><span class="mono">pill · bg var(--gc-green-pale) · border 1.5px solid rgba(26,107,60,0.2) · color var(--gc-green)</span></td></tr>
+        <tr><td><strong>Collapse Button</strong></td><td>Font</td><td><span class="mono">11px · 700 · border-radius 20px · padding 4px 10px</span></td></tr>
+        <tr><td><strong>Collapse Button</strong></td><td>Label</td><td><span class="mono">"Show ▶" when collapsed · "Hide ▼" when expanded</span></td></tr>
+        <tr><td><strong>Collapse Button</strong></td><td>Chevron rotation</td><td><span class="mono">rotate(-90deg) when collapsed · transition 0.25s ease</span></td></tr>
+        <tr><td><strong>Collapsed body</strong></td><td>State</td><td><span class="mono">display:none · default collapsed on ≤900px on load</span></td></tr>
+        <tr><td><strong>Header on mobile</strong></td><td>Interaction</td><td><span class="mono">cursor:pointer · hover bg var(--gc-green-pale)</span></td></tr>
+
+        <!-- NOTIFICATION DROPDOWN -->
+        <tr><td colspan="3" style="background:var(--off-white);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);">Notification Bell Dropdown</td></tr>
+        <tr><td><strong>Dropdown panel</strong></td><td>Width</td><td><span class="mono">340px</span></td></tr>
+        <tr><td><strong>Dropdown panel</strong></td><td>Shadow</td><td><span class="mono">0 12px 40px rgba(0,0,0,0.13)</span></td></tr>
+        <tr><td><strong>Dropdown panel</strong></td><td>Border radius</td><td><span class="mono">14px</span></td></tr>
+        <tr><td><strong>Dropdown list</strong></td><td>Max height</td><td><span class="mono">280px · overflow-y scroll</span></td></tr>
+        <tr><td><strong>nd-item unread</strong></td><td>Background</td><td><span class="mono">#f5fbf7</span></td></tr>
+        <tr><td><strong>nd-item hover</strong></td><td>Background</td><td><span class="mono">var(--gc-green-pale)</span></td></tr>
+        <tr><td><strong>Unread dot</strong></td><td>Size / color</td><td><span class="mono">7px circle · var(--gc-green)</span></td></tr>
+        <tr><td><strong>nd-icon sizes</strong></td><td>Dimensions</td><td><span class="mono">32px × 32px · border-radius 8px</span></td></tr>
+        <tr><td><strong>nd-blue</strong></td><td>Color</td><td><span class="mono">bg var(--blue-pale)</span></td></tr>
+        <tr><td><strong>nd-gold</strong></td><td>Color</td><td><span class="mono">bg var(--gc-gold-pale)</span></td></tr>
+        <tr><td><strong>nd-green</strong></td><td>Color</td><td><span class="mono">bg #eafaf1</span></td></tr>
+        <tr><td><strong>Footer link</strong></td><td>Style</td><td><span class="mono">bg var(--off-white) · color var(--gc-green) · 12px bold · border-top</span></td></tr>
+
+        <!-- NOTIFICATIONS FULL PAGE -->
+        <tr><td colspan="3" style="background:var(--off-white);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);">Notifications Full Page View</td></tr>
+        <tr><td><strong>Purpose</strong></td><td>Scope</td><td><span class="mono">System alerts + HR/VPAA updates only — NO submission confirmations (those are in History)</span></td></tr>
+        <tr><td><strong>Filter tabs</strong></td><td>Options</td><td><span class="mono">All · Unread · System · HR/VPAA</span></td></tr>
+        <tr><td><strong>Active tab</strong></td><td>Style</td><td><span class="mono">bg var(--gc-green) · white text · border-color var(--gc-green)</span></td></tr>
+        <tr><td><strong>notif-item unread</strong></td><td>Background</td><td><span class="mono">#f5fbf7</span></td></tr>
+        <tr><td><strong>notif-icon-wrap</strong></td><td>Size</td><td><span class="mono">40px × 40px · border-radius 10px</span></td></tr>
+        <tr><td><strong>notif-unread-dot</strong></td><td>Size / color</td><td><span class="mono">8px circle · var(--gc-green)</span></td></tr>
+        <tr><td><strong>notif-divider</strong></td><td>Style</td><td><span class="mono">bg var(--off-white) · 10.5px · uppercase · letter-spacing 1px · border-bottom</span></td></tr>
+
+        <!-- PROFILE VIEW -->
+        <tr><td colspan="3" style="background:var(--off-white);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);">Profile View</td></tr>
+        <tr><td><strong>Profile Hero</strong></td><td>Background</td><td><span class="mono">linear-gradient(135deg, #134f2c, #1a6b3c 55%, #22704a)</span></td></tr>
+        <tr><td><strong>Profile Hero</strong></td><td>Padding / radius</td><td><span class="mono">26px 28px · border-radius 16px</span></td></tr>
+        <tr><td><strong>Profile Hero</strong></td><td>Shadow</td><td><span class="mono">0 8px 32px rgba(26,107,60,0.22)</span></td></tr>
+        <tr><td><strong>Avatar circle (large)</strong></td><td>Size</td><td><span class="mono">72px · border 3px solid rgba(255,255,255,0.35) · bg rgba(255,255,255,0.18)</span></td></tr>
+        <tr><td><strong>Profile chip</strong></td><td>Style</td><td><span class="mono">bg rgba(255,255,255,0.14) · border rgba(255,255,255,0.22) · radius 20px · 11.5px white</span></td></tr>
+        <tr><td><strong>Profile grid</strong></td><td>Layout</td><td><span class="mono">grid · 1.4fr 1fr · gap 18px · stacks to 1fr on ≤768px</span></td></tr>
+        <tr><td><strong>Profile card</strong></td><td>Style</td><td><span class="mono">bg white · radius 14px · border 1px var(--border) · shadow 0 2px 6px rgba(0,0,0,0.04) · padding 18px 20px</span></td></tr>
+        <tr><td><strong>edu-level badge</strong></td><td>Colors</td><td><span class="mono">Bachelor: blue-pale/blue · Master's: gc-green-pale/gc-green · Doctorate: gc-gold-pale/#7d5a10</span></td></tr>
+        <tr><td><strong>rating-badge outstanding</strong></td><td>Style</td><td><span class="mono">bg #eafaf1 · color #1e8449 · border #a9dfbf</span></td></tr>
+        <tr><td><strong>pf-required star</strong></td><td>Color</td><td><span class="mono">var(--gc-gold) · 9.5px · 700</span></td></tr>
+        <tr><td><strong>Read-only notice</strong></td><td>Style</td><td><span class="mono">bg var(--gc-gold-pale) · border 1.5px rgba(201,168,76,0.3) · radius 10px · text #7d5a10</span></td></tr>
+
+        <!-- CHANGE PASSWORD -->
+        <tr><td colspan="3" style="background:var(--off-white);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);">Change Password (inside Profile)</td></tr>
+        <tr><td><strong>Input wrap</strong></td><td>Style</td><td><span class="mono">border 1.5px solid var(--border) · radius 8px · focus border var(--gc-green)</span></td></tr>
+        <tr><td><strong>Input</strong></td><td>Padding</td><td><span class="mono">11px 14px · 14px Source Sans 3</span></td></tr>
+        <tr><td><strong>Eye toggle button</strong></td><td>Style</td><td><span class="mono">no border · padding 0 12px · color var(--text-muted) · hover var(--gc-green)</span></td></tr>
+        <tr><td><strong>Strength bar</strong></td><td>Height</td><td><span class="mono">4px · radius 4px · bg var(--border) · hidden until typing</span></td></tr>
+        <tr><td><strong>Strength: Weak</strong></td><td>Color / width</td><td><span class="mono">#e74c3c · 25%</span></td></tr>
+        <tr><td><strong>Strength: Fair</strong></td><td>Color / width</td><td><span class="mono">#e67e22 · 50%</span></td></tr>
+        <tr><td><strong>Strength: Good</strong></td><td>Color / width</td><td><span class="mono">#f1c40f · 75%</span></td></tr>
+        <tr><td><strong>Strength: Strong</strong></td><td>Color / width</td><td><span class="mono">#27ae60 · 100%</span></td></tr>
+        <tr><td><strong>Match: success</strong></td><td>Color</td><td><span class="mono">#1e8449 · "✓ Passwords match"</span></td></tr>
+        <tr><td><strong>Match: fail</strong></td><td>Color</td><td><span class="mono">var(--danger) · "✗ Passwords do not match"</span></td></tr>
+        <tr><td><strong>Save button</strong></td><td>Style</td><td><span class="mono">linear-gradient(135deg, var(--gc-green), var(--gc-green-light)) · shadow 0 4px 12px rgba(26,107,60,0.25)</span></td></tr>
+        <tr><td><strong>Success banner</strong></td><td>Style</td><td><span class="mono">bg #eafaf1 · border 1.5px #a9dfbf · radius 10px · auto-dismiss after 4s</span></td></tr>
+
+        <!-- LOADING SCREEN -->
+        <tr><td colspan="3" style="background:var(--off-white);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);">Loading Screen (gordon_loading.html)</td></tr>
+        <tr><td><strong>Background</strong></td><td>Gradient</td><td><span class="mono">linear-gradient(160deg, #0d3a1f, #134f2c 40%, #1a6b3c 75%, #1e5c35)</span></td></tr>
+        <tr><td><strong>Logo circle</strong></td><td>Size</td><td><span class="mono">96px · bg white · shadow 0 8px 40px rgba(0,0,0,0.35)</span></td></tr>
+        <tr><td><strong>Spinner ring (outer)</strong></td><td>Style</td><td><span class="mono">border-top var(--gc-gold) · 1.4s linear infinite spin</span></td></tr>
+        <tr><td><strong>Spinner ring (inner)</strong></td><td>Style</td><td><span class="mono">border-bottom rgba(201,168,76,0.2) · 2.2s reverse spin</span></td></tr>
+        <tr><td><strong>Progress bar</strong></td><td>Height / colors</td><td><span class="mono">3px · linear-gradient(90deg, var(--gc-green-light), var(--gc-gold))</span></td></tr>
+        <tr><td><strong>Progress tip glow</strong></td><td>Style</td><td><span class="mono">6×9px · bg var(--gc-gold-light) · blur 1px · box-shadow 0 0 8px var(--gc-gold)</span></td></tr>
+        <tr><td><strong>Duration</strong></td><td>Total</td><td><span class="mono">~4.2s then fade-out 0.5s</span></td></tr>
+        <tr><td><strong>Mobile breakpoint</strong></td><td>Changes</td><td><span class="mono">≤480px · logo 80px · accent lines hidden · orbs reduced</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
   <!-- FOOTER -->
   <div style="text-align:center;padding:32px 0 0;border-top:1px solid var(--border);">
     <p style="font-family:'Playfair Display',serif;font-size:16px;color:var(--gc-green-dark);font-weight:600;margin-bottom:6px;">Gordon College — Faculty Ranking Portal</p>
-    <p style="font-size:12px;color:var(--text-muted);">Design System v1.0 · Generated March 2026 · For internal use by the development and design team</p>
+    <p style="font-size:12px;color:var(--text-muted);">Design System v2.0 · Updated March 2026 · For internal use by the development and design team</p>
   </div>
 
 </div>
